@@ -79,7 +79,7 @@ const location=[
     {
         name:"kill monster",
         "button text": ["go to town square","go to town square","go to town square"],
-        "button function": [goTown,goTown,goTown],
+        "button function": [goTown,goTown,easterEgg],
         "text":"The monster screams as it dies. you gain experience points and find gold"
     },
     {
@@ -93,6 +93,13 @@ const location=[
         "button text": ["REPLAY", "REPLAY", "REPLAY"],
         "button functions": [restart, restart, restart],
         text: "Congratulation you won the game by defeating the dragon"
+    },
+    {
+        name: "easter egg",
+        "button text": ["2","8","Go to town square"],
+        "button function": [pickTwo,pickEight,goTown],
+        text : "you find a secret game. Pick a number above. Ten numbers will be randomly chosen between 0 and 10." +
+            "If the number you choose one of the random numbers , you win ! "
     }
 ];
 
@@ -238,4 +245,30 @@ function restart(){
     healthText.innerText = health;
     xpText.innerText = xp;
     goTown();
+}
+function easterEgg(){
+    update(location[7]);
+}
+function pickTwo(){
+    pick(2);
+}
+function pickEight(){
+    pick(8);
+}
+function pick(guess){
+    let numbers =[];
+    while(numbers.length < 10){
+        numbers.push(Math.floor(Math.random()*11));
+    }
+    text.innerText = "you picked"+guess+" .";
+    if (numbers.indexOf(guess)!==-1){
+        text.innerText += "Right ! you won 20 gold!"
+        gold+=20;
+        goldText.innerText = gold;
+    }else{
+        text.innerText +=" Wrong! you lose 10 health!"
+        health -=10;
+        healthText.innerText = health;
+        if (health<=0){lose();}
+    }
 }
