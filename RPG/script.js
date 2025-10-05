@@ -204,6 +204,10 @@ function attack(){
     else if (monsterHealth<=0){
         (fighting===2) ? winGame():defeatMonster();
     }
+    if (Math.random()<=.1 && inventory.length !== 1){
+        text.innerText+= "your "+inventory.pop() +" breaks";
+        currentWeapon--;
+    }
 }
 function isMonsterHit(){
     return Math.random>.2 || health<20;
