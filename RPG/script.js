@@ -87,6 +87,12 @@ const location=[
         "button text":["REPLAY","REPLAY","REPLAY"],
         "button functions": [restart,restart,restart],
         text:"you died"
+    },
+    {
+        name: "win",
+        "button text": ["REPLAY", "REPLAY", "REPLAY"],
+        "button functions": [restart, restart, restart],
+        text: "Congratulation you won the game by defeating the dragon"
     }
 ];
 
@@ -107,7 +113,7 @@ function update(location){
     button1.addEventListener("click", location["button function"][0]);
     button2.addEventListener("click",location["button function"][1]);
     button3.addEventListener("click",location["button function"][2]);
-    text.innerText = location.text; // \" \" is called excaping
+    text.innerText = location.text; // \" \" is called escaping
 }
 
 function goTown() {
@@ -195,7 +201,7 @@ function attack(){
         lose();
     }
     else if (monsterHealth<=0){
-        defeatMonster();
+        (fighting===2) ? winGame():defeatMonster();
     }
 }
 function dodge(){
@@ -210,6 +216,9 @@ function defeatMonster(){
 }
 function lose(){
     update(location[5]);
+}
+function winGame(){
+ update(location[6]);
 }
 function restart(){
     xp =0;
