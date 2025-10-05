@@ -193,7 +193,8 @@ function goFight(){
 function attack(){
     text.innerText = "The "+monsters[fighting].name+" attacks.";
     text.innerText+= "You attack it with you "+weapons[currentWeapon].name+" .";
-    health -= monsters[fighting].level;
+    isMonsterHit() ? health -= monsters[fighting].level : text.innerText+= "you missed the attach"
+
     monsterHealth -= weapons[currentWeapon].power+ Math.floor(Math.random()+xp)+1;
     healthText.innerText = health;
     monsterHealthText.innerText = monsterHealth;
@@ -203,6 +204,9 @@ function attack(){
     else if (monsterHealth<=0){
         (fighting===2) ? winGame():defeatMonster();
     }
+}
+function isMonsterHit(){
+    return Math.random>.2 || health<20;
 }
 function dodge(){
     text.innerText = "you dodge the attach from the "+monsters[fighting].name+" .";
