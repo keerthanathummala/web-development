@@ -81,6 +81,12 @@ const location=[
         "button text": ["go to town square","go to town square","go to town square"],
         "button function": [goTown,goTown,goTown],
         "text":"The monster screams as it dies. you gain experience points and find gold"
+    },
+    {
+        name:"lose",
+        "button text":["REPLAY","REPLAY","REPLAY"],
+        "button functions": [restart,restart,restart],
+        text:"you died"
     }
 ];
 
@@ -90,6 +96,7 @@ button2.addEventListener("click",goCave);
 button3.addEventListener("click",fightDragon);
 
 function update(location){
+    monsterStats.style.display="none";
     //now after clicking go store button it is going to display 3 new button with following texts
     button1.innerHTML = location["button text"][0];
     button2.innerHTML = location["button text"][1];
@@ -202,5 +209,16 @@ function defeatMonster(){
     update(location[4]);
 }
 function lose(){
-
+    update(location[5]);
+}
+function restart(){
+    xp =0;
+    health = 100;
+    gold = 50;
+    currentWeapon = 0;
+    inventory = ["stick"];
+    goldText.innerText = gold;
+    healthText.innerText = health;
+    xpText.innerText = xp;
+    goTown();
 }
