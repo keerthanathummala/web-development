@@ -75,6 +75,12 @@ const location=[
         "button text":["Attack","Dodge","Run"],
         "button function": [attack,dodge,goTown],
         text:"you are fighting a monster."
+    },
+    {
+        name:"kill monster",
+        "button text": ["go to town square","go to town square","go to town square"],
+        "button function": [goTown,goTown,goTown],
+        "text":"The monster screams as it dies. you gain experience points and find gold"
     }
 ];
 
@@ -171,5 +177,30 @@ function goFight(){
     monsterHealth.innerHTML = monsters[fighting].name;
     monsterHealth.innerHTML = monsterHealth;
 }
-function attack(){}
-function dodge(){}
+function attack(){
+    text.innerText = "The "+monsters[fighting].name+" attacks.";
+    text.innerText+= "You attack it with you "+weapons[currentWeapon].name+" .";
+    health -= monsters[fighting].level;
+    monsterHealth -= weapons[currentWeapon].power+ Math.floor(Math.random()+xp)+1;
+    healthText.innerText = health;
+    monsterHealthText.innerText = monsterHealth;
+    if (health<=0){
+        lose();
+    }
+    else if (monsterHealth<=0){
+        defeatMonster();
+    }
+}
+function dodge(){
+    text.innerText = "you dodge the attach from the "+monsters[fighting].name+" .";
+}
+function defeatMonster(){
+    gold+= Math.floor(monsters[fighting].level*6.7);
+    xp += monsters[fighting].level;
+    goldText.innerText = gold;
+    xpText.innerText = xp;
+    update(location[4]);
+}
+function lose(){
+
+}
